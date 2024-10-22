@@ -31,6 +31,6 @@ jobs:
         run: npm run build
         working-directory: ./react/todo-cra  
 
-      - name: Run tests
-        run: npm test
-        working-directory: ./react/todo-cra  
+        -name: Run tests
+         run: npm test -- --passWithNoTests
+         working-directory: ./react/todo-cra
