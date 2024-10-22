@@ -13,23 +13,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-     
+      # Install dependencies in the 'react/todo-cra' folder
       - name: Install dependencies
         run: npm install
-
-   
+        working-directory: ./react/todo-cra  
+      # Build React app in the 'react/todo-cra' folder
       - name: Build React app
         run: npm run build
+        working-directory: ./react/todo-cra  
 
-
+      # Run tests in the 'react/todo-cra' folder
       - name: Run tests
         run: npm test
+        working-directory: ./react/todo-cra  
