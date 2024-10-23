@@ -1,4 +1,4 @@
-name: React CI
+name: React CI and Deploy to AWS ECR
 
 on:
   push:
@@ -13,22 +13,62 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
 
- 
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-     
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
-        working-directory: ./react/todo-cra  
+        working-directory: ./react/todo-cra
 
+      # Step 4: Build React app
       - name: Build React app
         run: npm run build
-        working-directory: ./react/todo-cra  
+        working-directory: ./react/todo-cra
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Configure AWS credentials using GitHub Secrets
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Step 3: Login to Amazon ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Step 4: Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t my-react-app:latest .
+        # Adjust the path to the Dockerfile if needed
+
+      # Step 5: Tag Docker image
+      - name: Tag Docker image
+        run: |
+          docker tag my-react-app:latest ${{ secrets.ECR_REPOSITORY }}:latest
+
+      # Step 6: Push Docker image to Amazon ECR
+      - name: Push Docker image to Amazon ECR
+        run: |
+          docker push ${{ secrets.ECR_REPOSITORY }}:latest
 
 
