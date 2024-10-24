@@ -6,8 +6,8 @@ WORKDIR /app
 
 # Copy the package.json and package-lock.json files
  
-COPY package.json ./
-COPY package-lock.json ./
+COPY ./react/todo-cra/package.json ./
+COPY ./react/todo-cra/package-lock.json ./
 
 #RUN ls -la /app
 
