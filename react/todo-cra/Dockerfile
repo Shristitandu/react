@@ -5,7 +5,8 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy the package.json and package-lock.json files
- COPY ./react/todo-cra/package*.json ./
+ 
+COPY package*.json ./
 
 # Install the dependencies
 RUN npm install
