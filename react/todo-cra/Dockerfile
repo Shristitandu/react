@@ -8,8 +8,10 @@ WORKDIR /app
  
 COPY package*.json ./
 
+RUN ls -la /app
+
 # Install the dependencies
-#RUN npm install
+RUN npm install
 
 # Copy the rest of the application files
 COPY . .
