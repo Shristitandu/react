@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy the package.json and package-lock.json files
  
-COPY package*.json ./
+COPY package.json ./
 
 #RUN ls -la /app
 
