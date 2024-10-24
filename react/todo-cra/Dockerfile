@@ -15,7 +15,7 @@ COPY ./react/todo-cra/package-lock.json ./
 RUN npm install
 
 # Copy the rest of the application files
-COPY . .
+COPY ./react/todo-cra ./
 
 # Build the React app for production
 RUN npm run build
