@@ -1,0 +1,10 @@
+version: '3'
+services:
+  my-react-app:
+    image: 988250643582.dkr.ecr.us-east-1.amazonaws.com/my-react-app:latest
+    ports:
+      - "80:80" # Map container port 80 to host port 80
+    environment:
+      - NODE_ENV=production
+    restart: always
+   
