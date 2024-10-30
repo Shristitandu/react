@@ -67,3 +67,5 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
           ssh -o StrictHostKeyChecking=no -i private_key.pem -p 22109 testUser@162.0.216.97 'bash -s' < ./react/todo-cra/deploy.sh
+           - name: Clean up private key
+             run: rm -f private_key.pem
