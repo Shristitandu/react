@@ -59,24 +59,13 @@ jobs:
         run: |
           docker tag my-react-app:latest 988250643582.dkr.ecr.us-east-1.amazonaws.com/my-react-app:latest
           docker push 988250643582.dkr.ecr.us-east-1.amazonaws.com/my-react-app:latest
-          
-       -name: Remote SSH Command
-        on:
-          push:
-       jobs:
-         build:
-         name: Build
-         runs-on: ubuntu-latest
-         steps:
-             - name: Executing remote SSH commands using private key
-             uses: appleboy/ssh-action@v1.1.0
-             with:
-              host: ${{ secrets.HOST }}
-              username: ${{ secrets.USERNAME }}
-              key: ${{ secrets.SSH_PRIVATE_KEY }}
-              port: ${{ secrets.PORT }}
-              script: whoami
 
-
-        
- 
+      - name: Remote SSH Command
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            whoami
