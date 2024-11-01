@@ -63,11 +63,11 @@ jobs:
       - name: Remote SSH Command
         uses: appleboy/ssh-action@v1.1.0
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          passphrase: ${{secrets.PASSPHRASE}}
-          password:  ${{secrets.PASSWORD}}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.SSH_PORT }}
           script: |
-            whoami
+            echo "Connected successfully"
+          
