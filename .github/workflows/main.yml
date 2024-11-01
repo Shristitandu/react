@@ -68,5 +68,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           passphase: ${{secrets.PASSPHASE}}
+          password:  ${{secrets.PASSWORD}}
           script: |
             whoami
